@@ -10,7 +10,7 @@ def get_genre(file_path):
         return audio.tags.get('TCON', ['Unknown'])[0]
     elif file_extension == '.aiff':
         audio = TinyTag.get(file_path)
-        return audio.get if audio.genre else 'Unknown'
+        return audio.genre if audio.genre else 'Unknown'
     else:
         return 'Unknown'
     
