@@ -1,6 +1,6 @@
 import os
 from mutagen.mp3 import MP3
-from mutagen.aiff import AIFF
+from mutagen.easyid3 import EasyID3
 
 def get_genre(file_path):
     _, file_extension = os.path.splitext(file_path.lower())
@@ -9,8 +9,8 @@ def get_genre(file_path):
         audio = MP3(file_path)
         return audio.tags.get('TCON', ['Unknown'])[0]
     elif file_extension == '.aiff':
-        audio = AIFF(file_path)
-        return audio.tags.get('genre', ['Unknown'])[0]
+        audio = EasyID3(file_path)
+        return audio.get('genre', ['Unknown'])[0]
     else:
         return 'Unknown'
     
