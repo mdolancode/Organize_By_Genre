@@ -1,6 +1,6 @@
 import os
 from mutagen.mp3 import MP3
-from mutagen.easyid3 import EasyID3
+from tinytag import TinyTag
 
 def get_genre(file_path):
     _, file_extension = os.path.splitext(file_path.lower())
@@ -9,8 +9,8 @@ def get_genre(file_path):
         audio = MP3(file_path)
         return audio.tags.get('TCON', ['Unknown'])[0]
     elif file_extension == '.aiff':
-        audio = EasyID3(file_path)
-        return audio.get('genre', ['Unknown'])[0]
+        audio = TinyTag.get(file_path)
+        return audio.get if audio.genre else 'Unknown'
     else:
         return 'Unknown'
     
