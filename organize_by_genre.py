@@ -8,7 +8,7 @@ def get_genre(file_path):
     if file_extension == '.mp3':
         audio = MP3(file_path)
         return audio.tags.get('TCON', ['Unknown'])[0]
-    elif file_extension == 'aiff':
+    elif file_extension == '.aiff':
         audio = File(file_path)
         return audio.tags.get('genre', ['Unknown'])[0]
     else:
